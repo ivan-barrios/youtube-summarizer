@@ -23,18 +23,19 @@ export async function fetchTranscript(videoId: string): Promise<string> {
     if (!response.body) {
       throw new Error("Failed to fetch summary");
     }
-  
+    
     const reader = response.body.getReader();
     const decoder = new TextDecoder("utf-8");
     let fullText = "";
     let done = false;
-  
+    
     while (!done) {
-      const { value, done: streamDone } = await reader.read();
-      done = streamDone;
-      fullText += decoder.decode(value, { stream: true });
+        const { value, done: streamDone } = await reader.read();
+        done = streamDone;
+        fullText += decoder.decode(value, { stream: true });
     }
-  
+    
+    
     return fullText.trim();
   }
   

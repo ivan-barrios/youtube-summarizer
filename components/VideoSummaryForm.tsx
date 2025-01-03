@@ -14,13 +14,10 @@ export default function VideoSummaryForm({
 }) {
   const [videoUrl, setVideoUrl] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [summary, setSummary] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    setSummary("");
 
     try {
       const url = new URL(videoUrl);
@@ -34,11 +31,10 @@ export default function VideoSummaryForm({
 
       // Fetch the transcript
       const transcript = await fetchTranscript(videoId);
-
+      console.log(transcript);
       // Summarize the transcript
       const generatedSummary = await fetchSummary(transcript);
-
-      setSummary(generatedSummary || "Summary not available");
+      console.log(generatedSummary);
       onSummaryReceived(generatedSummary);
     } catch (error) {
       console.error(error);
