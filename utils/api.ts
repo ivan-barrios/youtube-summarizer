@@ -23,7 +23,8 @@ export async function fetchTranscript(videoId: string): Promise<string> {
     if (!response.body) {
       throw new Error("Failed to fetch summary");
     }
-    
+
+
     const reader = response.body.getReader();
     const decoder = new TextDecoder("utf-8");
     let fullText = "";
@@ -36,6 +37,7 @@ export async function fetchTranscript(videoId: string): Promise<string> {
     }
     
     
-    return fullText.trim();
+    const parsed = JSON.parse(fullText); // If it's JSON, parse it
+    return parsed.summary.trim();
   }
   

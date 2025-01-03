@@ -34,7 +34,7 @@ export default function VideoSummaryForm({
       console.log(transcript);
       // Summarize the transcript
       const generatedSummary = await fetchSummary(transcript);
-      console.log(generatedSummary);
+
       onSummaryReceived(generatedSummary);
     } catch (error) {
       console.error(error);

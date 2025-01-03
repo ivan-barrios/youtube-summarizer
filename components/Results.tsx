@@ -2,6 +2,8 @@
 
 import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import Markdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 export default function Results({ summary }: { summary: string | null }) {
   if (!summary) return null;
@@ -20,7 +22,11 @@ export default function Results({ summary }: { summary: string | null }) {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="text-gray-300">{summary}</p>
+          <div className="prose prose-lg mt-4">
+            <Markdown remarkPlugins={[remarkGfm]} className="text-gray-300">
+              {summary}
+            </Markdown>
+          </div>
         </CardContent>
       </Card>
     </motion.div>
